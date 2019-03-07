@@ -42,7 +42,7 @@ class Scrapper():
  
         calls, rest = self.total_tweets // MAX_REQUEST_SIZE, self.total_tweets % MAX_REQUEST_SIZE
 
-        if rest > 0:
+        if rest >= 0:
             tweets = self.get_tweet_batch(rest, None)
         for i in range(calls):
             time.sleep(DELAY)
