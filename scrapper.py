@@ -49,6 +49,12 @@ class Scrapper():
             tweets.extend(self.get_tweet_batch(MAX_REQUEST_SIZE, tweets[-1]['id']))
 
         return tweets
+    
+    def dump_tweets(self,tweets):
+        ''' Salva os tweets em um arquivo json '''
+        
+        with open('./data/tweets.txt', 'w') as out_file:
+            json.dump(tweets, out_file)
 
 def main():
     parser = argparse.ArgumentParser()
@@ -60,9 +66,10 @@ def main():
 
     tst = Scrapper(args.username, args.total, args.retweets)
 
-    oi = tst.get_total_tweets()
+    tweets = tst.get_total_tweets()
 
-    return oi
+    tst.dump_tweets(tweets)
+
 
 if __name__ == '__main__':
-    oi = main()
+    main()
